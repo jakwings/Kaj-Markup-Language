@@ -1,0 +1,505 @@
+==================================
+Kaj Markup Language Specifications (DRAFT)
+==================================
+
+Kaj is a simple and extensible markup language for writing HTML5 documents.
+
+Copyleft: This project is in the public domain.
+
+
+HTML5 Output Format
+===================
+
+All the transpiled content should be wrapped in a <div>:
+
+    <div class="kaj-doc">
+    </div>
+
+
+Special Character Escaping
+==========================
+
+No more escaping mechanisms.
+
+
+Span Level Markup
+=================
+
+Nested inline markup is not allowed. Special formats should only be used when
+really necessary.
+
+{* *} & {/ /} & {% %}
+---------------------
+
+Bold text is surrounded with "{* *}". For example:
+
+    This message is {*very important*}!
+    这条信息{*非常重要*}！
+
+which gives:
+
+    This message is <b>very important</b>!
+    这条信息<b>非常重要</b>！
+
+Italic text is surrounded with "{/ /}". For example:
+
+    {/Alice's Adventures in Wonderland/} is one of my favourite storybook.
+    {/汤博士/}的名字实在是不太适宜用斜体的中文字来表示。
+
+which gives:
+
+    <i>Alice&#39;s Adventures in Wonderland</i> is one of my favourite storybook.
+    <i>汤博士</i>的名字实在是不太适宜用斜体的中文字来表示。
+
+Both formats can be combined:
+
+    Please {%mind your steps%}, sir.
+    中文方块字的间隔实在不是太利于使用{%斜体%}格式。
+
+which gives:
+
+    Please <b><i>mind your steps</i></b>, sir.
+    中文方块字的间隔实在不是太利于使用<b><i>斜体</i></b>格式。
+
+{` `} & {: :}
+-------------
+
+Text inside "{` `}" is treated as a code snippet, and text inside "{: :}" is
+keystrokes. For example:
+
+    Press {:Ctrl+Cmd+J:} to open the console, and input {`"Hello, world!"`}.
+    请按下{:Ctrl+Cmd+J:}以打开调试面板，并输入{`"Hello, world!"`}。
+
+which gives:
+
+    Press <kbd>Ctrl+Cmd+J</kbd> to open the console, and input <code>&quot;Hello, world!&quot;</code>.
+    请按下<kbd>Ctrl+Cmd+J</kbd>以打开调试面板，并输入<code>"Hello, world!"</code>。
+
+`` ``
+-----
+
+Text inside "`` ``" is literal text. For example:
+
+    We have four sets: ``{T}, {F}, {T,F}, {}``
+    现在有四个集合：``{T}, {F}, {T,F}, {}``
+
+which gives:
+
+    We have four sets: <span class="kaj-inline-literal">{T}, {F}, {T,F}, {}</span>
+    现在有四个集合：<span class="kaj-inline-literal">{T}, {F}, {T,F}, {}</span>
+
+{{ }}
+-----
+
+Text inside "{{ }}" is raw HTML code. For example:
+
+    The deadline is {{<del>April 1</del>}} May 1.
+    截止日期为{{<del>4月1日</del>}}5月1日。
+
+which gives:
+
+    The deadline is <del>April 1</del> May 1.
+    截止日期为<del>4月1日</del>5月1日。
+
+{~role~ ~}
+----------
+
+Text inside "{~role~ ~}" is interpreted according to the role specified. For
+example:
+
+    Do you like Einstein's famous equation {~latex~\mathrm{E} = mc^2~}?
+    你喜欢爱因斯坦的著名公式{~latex~\mathrm{E} = mc^2~}吗？
+
+    My email address is: {~email~user@example.com~}
+    我的电子邮箱地址为：{~邮箱~user@example.com~}
+
+    {~ruby~中文~zhōng wén~}
+
+The output is dependent on the implementation of the converter. It may be
+something like these:
+
+    Do you like Einstein&#39;s famous equation <span class="latex">\mathrm{E} = mc^2</span>?
+    你喜欢爱因斯坦的著名公式<span class="latex">\mathrm{E} = mc^2</span>吗？
+
+    My email address is: <a href="mailto:user@example.com">user@example.com</a>
+    我的电子邮箱地址为：<a href="mailto:user@example.com">user@example.com</a>
+
+    <ruby>中文<rp>（</rp><rt>zhōng wén</rt><r）p></rp></ruby>
+
+{~ ~}
+-----
+
+Text inside "{~ ~}" is treated as an anchor. For example:
+
+    {~First~}, you need an apple.
+    {~anchor~First~}, you need an apple.
+
+which gives:
+
+    <span class="kaj-anchor" id="kaj-anchor-def-first">First</span>, you need an apple.
+    <span class="kaj-anchor" id="kaj-anchor-def-first">First</span>, you need an apple.
+
+{# #}
+-----
+
+Text inside "{# #}" is the id of an anchor. For example:
+
+    {#first#}First, you need an apple.
+    {#first#}首先，你需要一只苹果。
+
+which gives:
+
+    <span class="kaj-anchor-tag" id="kaj-anchor-def-first"></span>First, you need an apple.
+    <span class="kaj-anchor-tag" id="kaj-anchor-def-first"></span>首先，你需要一只苹果。
+
+{[ ]}
+-----
+
+Text inside "{[ ]}" is the id of a note or citation. For example:
+
+    Whenever you are frustrated by newbies, you may tell them to {[STFW]} first.{[1]}
+    每当你被菜鸟们烦得要死时，你或许会叫他们先去{[STFW]}。{[1]}
+
+which gives:
+
+    Whenever you are frustrated by newbies, you may tell them to <a class="kaj-cite-ref" href="#kaj-cite-def-STFW">STFW</a> first.<a class="kaj-note-ref" href="#kaj-note-def-1"><sup>1</sup></a>
+    每当你被菜鸟们烦得要死时，你或许会叫他们先去<a class="kaj-cite-ref" href="#kaj-cite-def-STFW">STFW</a>。<a class="kaj-note-ref" href="#kaj-note-def-1"><sup>1</sup></a>
+
+[[ ]] & [[ | ]]
+---------------
+
+Text inside "[[ ]]" are taken as linked text. For example:
+
+    Welcome to [[my homepage | http://example.com]]. Have a good day.
+    欢迎光临[[我的主页 | http://example.com]]，祝你愉快。
+
+    Welcome to [[my homepage]]. Have a good day.
+    欢迎光临[[我的主页]]，祝你愉快。
+
+    Please see [[the first step | #first#]].
+    请看[[第一步 | #first#]].
+
+    [[Footnote 1 | ~1~]] has provided some useful links.
+    [[脚注一 | ~1~]]提供了一些有用的链接。
+
+which gives:
+
+    Welcome to <a class="kaj-link-external" href="http://example.com">my homepage</a>. Have a good day.
+    欢迎光临<a class="kaj-link-external" href="http://example.com">我的主页</a>，祝你愉快。
+
+    Welcome to <a class="kaj-link-external" href="http://example.com">my homepage</a>. Have a good day.
+    欢迎光临<a class="kaj-link-external" href="http://example.com">我的主页</a>，祝你愉快。
+
+    Please see <a class="kaj-link-internal" href="#kaj-anchor-def-first">the first step</a>.
+    请看<a class="kaj-link-internal" href="#kaj-anchor-def-first">第一步</a>.
+
+    <a class="kaj-link-internal" href="#kaj-note-def-1">Footnote 1</a> has provided some useful links.
+    <a class="kaj-link-internal" href="#kaj-note-def-1">脚注一</a>提供了一些有用的链接。
+
+{| |}
+-----
+
+Pipes for anything! For example:
+
+    {|Logo|} My logo is cool, hah?
+
+
+Block Level Markup
+==================
+
+All block level markup can not contain span level markup. By default, all block
+level markup must start at the first column relative to the current indentaion
+level.
+
+Paragraphs
+----------
+
+One line for one paragraph. For example:
+
+    This is a normal paragraph without any span level markup.
+    这是一个不包含任何行内标记的普通段落。
+
+which gives:
+
+    <p>This is a normal paragraph without any span level markup.</p>
+    <p>这是一个不包含任何行内标记的普通段落。</p>
+
+No line-wrapping effect, really.
+
+Sections & Titles
+-----------------
+
+Titles are specified by consecutive ='s followed by a space. If the length of
+the current marker is greater than the previous one, then the following text
+will be wrapped in a new section. If the length of the current marker is less
+than the previous one, then the following text will be wrapped in a new section
+in the previous section. For example:
+
+    = Section 1
+
+    == Section 1-1
+
+    === Section 1-1-1
+
+    == Section 1-2
+
+    = Section 2
+
+which gives:
+
+    <h1 class="kaj-title" id="kaj-title-1"><span>Section 1</span></h1>
+
+      <section><h1 class="kaj-title" id="kaj-title-1-1"><span>Section 1-1</span></h1>
+        <section><h1 class="kaj-title" id="kaj-title-1-1-1"><span>Section 1-1-1</span></h1>
+        </section>
+      </section>
+
+      <section><h1 class="kaj-title" id="kaj-title-1-2"><span>Section 1-2</span></h1>
+      </section>
+
+    <h1 class="kaj-title" id="kaj-title-2"><span>Section 2</span></h1>
+
+Unordered Lists
+---------------
+
+An unordered list may contain one or more items. Each item is started by a "*",
+"+" or "-" followed by a space. For example:
+
+    + Directory 1
+    - Directory 2
+      + Directory 2-1
+      - Directory 2-2
+        * File 2-2-1
+        * File 2-2-2
+        + Directory 2-2-1
+    - Directory 3
+
+which gives:
+
+    <ul>
+      <li class="kaj-item-y"><p>Directory 1</p></li>
+      <li class="kaj-item-z"><p>Directory 2</p>
+        <ul>
+          <li class="kaj-item-y"><p>Directory 2-1</p></li>
+          <li class="kaj-item-z"><p>Directory 2-2</p>
+            <ul>
+              <li class="kaj-item-x">File 2-2-1</li>
+              <li class="kaj-item-x">File 2-2-2</li>
+              <li class="kaj-item-y">Directory 2-2-1</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="kaj-item-z"><p>Directory 3</p>
+    </ul>
+
+Ordered Lists
+-------------
+
+An ordered list may contain one or more items. Each item is started with a "#",
+followed by an number or numbers concatenated with ".", and then followed by
+a space. For example:
+
+    #1 Item 1
+    #2 Item 2
+       #2.1 Item 2-1
+       #2.2 Item 2-2
+          #2.2.1 Item 2-2-1
+          #2.2.2 Item 2-2-2
+          #2.2.3 Item 2-2-3
+    #3 Item 3
+
+which gives:
+
+    <ol>
+      <li><p>Item 1</p></li>
+      <li><p>Item 2</p>
+        <ol>
+          <li><p>Item 2-1</p></li>
+          <li><p>Item 2-2</p>
+            <ol>
+              <li>Item 2-2-1</li>
+              <li>Item 2-2-2</li>
+              <li>Item 2-2-3</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><p>Item 3</p>
+    </ol>
+
+Line Blocks
+-----------
+
+A line block is a group of lines beginning with "| ". Each "| " indicates a new
+line. Line breaks are preserved. For example:
+
+    | 坚定你的信念吧，我的心，天会破晓的。
+    | 希望的种子藏在泥土里，它会发芽的。
+    |
+    | 睡眠，像一个花蕾，会向阳光打开它的心，而沉默也会找到它的声音。
+    | 白天是近在眼前了，那时你的负担将变成礼物，你受的苦将照明你的路。
+
+which gives:
+
+    <div class="kaj-line-block">
+      <div class="kaj-line">坚定你的信念吧，我的心，天会破晓的。</div>
+      <div class="kaj-line">希望的种子藏在泥土里，它会发芽的。</div>
+      <div class="kaj-line"><br></div>
+      <div class="kaj-line">睡眠，像一个花蕾，会向阳光打开它的心，而沉默也会找到它的声音。</div>
+      <div class="kaj-line">白天是近在眼前了，那时你的负担将变成礼物，你受的苦将照明你的路。</div>
+    </div>
+
+Indented Blocks
+---------------
+
+Every block level element can be indented with one or more spaces. For example:
+
+    This is a normal paragraph.
+
+       This paragraph is indented, so it is in another block.
+
+          This paragraph is also indented, so it is in another block, too.
+
+          This is another paragraph.
+
+which gives:
+
+    <p>This is a normal paragraph.</p>
+    <blockquote class="kaj-indented">
+      <p>This paragraph is indented, so it is in another block.</p>
+      <blockquote class="kaj-indented">
+        <p>This paragraph is fully indented, so it is in another block, too.</p>
+        <p>This is another paragraph.</p>
+      </blockquote>
+    </blockquote>
+
+Code Blocks
+-----------
+
+A code block can be started with "~//" followed by an optional language name
+and optional classes in order. And the main content of the code block must be
+indented with three spaces. For example:
+
+    ~//ascii prettyprint
+       .-. .-')    ('-.             
+       \  ( OO )  ( OO ).-.         
+       ,--. ,--.  / . --. /     ,--.
+       |  .'   /  | \-.  \  .-')| ,|
+       |      /,.-'-'  |  |( OO |(_|
+       |     ' _)\| |_.'  || `-'|  |
+       |  .   \   |  .-.  |,--. |  |
+       |  |\   \  |  | |  ||  '-'  /
+       `--' '--'  `--' `--' `-----' 
+
+which gives:
+
+    <pre class="lang-ascii prettyprint">
+    .-. .-')    ('-.             
+    \  ( OO )  ( OO ).-.         
+    ,--. ,--.  / . --. /     ,--.
+    |  .'   /  | \-.  \  .-')| ,|
+    |      /,.-'-'  |  |( OO |(_|
+    |     ' _)\| |_.'  || `-'|  |
+    |  .   \   |  .-.  |,--. |  |
+    |  |\   \  |  | |  ||  '-'  /
+    `--' '--'  `--' `--' `-----' 
+    </pre>
+
+You can use one-liner code block with "~/ ", too. For example:
+
+    ~/ ((lambda (x) (x x)) (lambda (x) (x x)))
+
+which gives:
+
+    <pre class="kaj-oneliner">
+    ((lambda (x) (x x)) (lambda (x) (x x)))
+    </pre>
+
+Explicit Markup Blocks
+----------------------
+
+With an implicit directive:
+
+    .. comments
+    ..
+       Indented
+
+which gives:
+
+    <!-- comments -->
+    <blockquote class="kaj-indented">
+      <p>Indented</p>
+    </blockquote>
+
+With an explicit directives (at most one body is allowed):
+
+    .. directive{arguments} body
+       :id: identifier
+       :class: class name
+       :title: title
+       :style: stylesheet
+       :option: value
+       :option: value
+       body
+
+All native explicit directives:
+
+    .. @merge{path/to/file}
+
+    .. @embed{path/to/file}
+
+    .. @{metadata}
+       :author: Jak Wings
+       :date: 2014-01-01
+       :category: other
+
+    .. raw{html}
+       <div>something</div>
+
+    .. note{1} This is the first footnote definition.
+
+    .. note{W3C} This is a citation definition about W3C.
+
+    .. class{quote}
+          If you shed tears when yuo miss the sun, you also miss the stars.
+
+    .. block{classname}
+       Something...
+
+       And another...
+
+    .. csv-table{Caption}
+       :header: true
+       :delimiter: |
+       ID | NAME  | TEAM
+       1  | Andy  | White
+       2  | Katta | Blue
+       3  | Nanne | Red
+
+    .. contents{Topic}
+       :depth: 3
+
+    .. link{homepage} http://example.com
+
+    .. image{png} avatar2x.png 2x, avatar.png 1x, big_avatar.png 1024w
+       :alt: My logo.
+       :caption: caption
+       :link: http://example.com/avatar.png
+       :style: width: 50px; height: 50px;
+       :class: dppx-2x
+
+    .. pipe-image{logo} http://example.com/logo.png
+       :alt: My logo.
+       :format: png
+
+    .. pipe-text{logo} My image is broken. :-(
+
+    .. pipe-text{logo} My image is <b>broken</b>. :-(
+       :format: raw
+
+    .. pipe-abbr{RTFM} Read The Fantastic Manpage
+
+    .. header{}
+
+    .. footer{}
