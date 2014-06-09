@@ -196,6 +196,11 @@ which gives:
     <a class="kaj-link-internal" href="#kaj-note-def-1">Footnote 1</a> has provided some useful links.
     <a class="kaj-link-internal" href="#kaj-note-def-1">脚注一</a>提供了一些有用的链接。
 
+Others:
+
+    [[link to title | =1-2=]]
+    [[link to defined uri | {homepage}]]
+
 {| |}
 -----
 
