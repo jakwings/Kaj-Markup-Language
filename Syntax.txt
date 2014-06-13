@@ -493,6 +493,7 @@ All native explicit directives:
        :link: http://example.com/avatar.png
        :style: width: 50px; height: 50px;
        :class: dppx-2x
+       :lazyload: true
 
     .. pipe-image{logo} http://example.com/logo.png
        :alt: My logo.
