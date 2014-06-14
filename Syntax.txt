@@ -124,7 +124,7 @@ something like these:
     My email address is: <a href="mailto:user@example.com">user@example.com</a>
     我的电子邮箱地址为：<a href="mailto:user@example.com">user@example.com</a>
 
-    <ruby>中文<rp>（</rp><rt>zhōng wén</rt><r）p></rp></ruby>
+    <ruby>中文<rp>（</rp><rt>zhōng wén</rt><rp>）</rp></ruby>
 
 {~ ~}
 -----
