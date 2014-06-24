@@ -129,15 +129,16 @@ something like these:
 {~ ~}
 -----
 
-Text inside "{~ ~}" is treated as an anchor. For example:
+Text inside "{~ ~}" is treated as an general markup (an implicit role). For
+example:
 
-    {~First~}, you need an apple.
-    {~anchor~First~}, you need an apple.
+    可能带{~删除线~}效果？
+    It may be {~deleted~}?
 
 which gives:
 
-    <span class="kaj-anchor" id="kaj-anchor-def-first">First</span>, you need an apple.
-    <span class="kaj-anchor" id="kaj-anchor-def-first">First</span>, you need an apple.
+    可能带<span class="kaj-general">删除线</span>效果？
+    It may be <span class="kaj-general">deleted</span>?
 
 {# #}
 -----
