@@ -7,15 +7,6 @@ Kaj is a simple and extensible markup language for writing HTML5 documents.
 Copyleft: This project is in the public domain.
 
 
-HTML5 Output Format
-===================
-
-All the transpiled content should be wrapped in a <div>:
-
-    <div class="kaj-doc">
-    </div>
-
-
 Special Character Escaping
 ==========================
 
@@ -478,8 +469,9 @@ All native explicit directives:
     .. csv-table{Caption}
        :header: true
        :delimiter: |
+       :linebreak: /
        ID | NAME  | TEAM
-       1  | Andy  | White
+       1  | Andy  | White / Black
        2  | Katta | Blue
        3  | Nanne | Red
 
