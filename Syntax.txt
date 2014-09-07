@@ -225,13 +225,14 @@ No line-wrapping effect, really.
 Sections & Titles
 -----------------
 
-Titles are specified by consecutive ='s followed by a space. If the length of
-the current marker is greater than the previous one, then the following text
-will be wrapped in a new section. If the length of the current marker is less
-than the previous one, then the following text will be wrapped in a new section
-in the previous section. For example:
+Titles are specified by consecutive ='s followed by a space. The title text can
+be followed by spaces and consecutive ='s which will be stripped away. If the
+length of the current marker is greater than the previous one, then the
+following text will be wrapped in a new section. If the length of the current
+marker is less than the previous one, then the following text will be wrapped
+in a new section in the previous section. For example:
 
-    = Section 1
+    = Section 1 ===========
 
     == Section 1-1
 
