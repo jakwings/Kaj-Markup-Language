@@ -10,9 +10,10 @@ The Kaj to HTML5 converter (written in JavaScript) is almost ready now, but I wo
     - [X] Basic markups (inline/block level)
     - [X] Extensible "role"s
     - [X] Extensible "directive"s
-    - [X] Customizable renderer
+    - [X] Customizable renderers
     - [X] Aliases for "role"s and "directive"s are possible. (for internationalization)
 
+Demo: http://jakwings.github.io/Kaj-Markup-Language/
 
 License Information
 ===================
