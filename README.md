@@ -15,6 +15,11 @@ The Kaj to HTML5 converter (written in JavaScript) is almost ready now, but I wo
 
 Demo: http://jakwings.github.io/Kaj-Markup-Language/
 
+Implementations
+===============
+
+* [kaj.js](https://github.com/jakwings/kaj.js) (JavaScript, Node.js)
+
 License Information
 ===================
 
