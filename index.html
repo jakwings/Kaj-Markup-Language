@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kaj to HTML5</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="kaj.js"></script>
+  </head>
+  <body>
+    <h1>Kaj to HTML5</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="panel panel-default col-md-6 col-xs-12">
+          <div class="panel-heading">Source Text</div>
+          <div class="panel-body">
+<textarea id="input" autofocus>
+.. contents{Contents}
+
+= Kaj to HTML5 Converter =
+
+Let's type something here.
+
+== Paragraphs
+
+Kaj's syntax is very similar to [[reStructuredText]]'s.
+But now it is just for writing HTML5 documents.
+
+.. link{reStructuredText} http://docutils.sourceforge.net/rst.html
+
+== Powerful Features
+
+#1 Extensible "role"s
+#2 Extensible "directive"s
+#3 Customizable renderers
+#4 Aliases for "role"s and "directive"s are possible. (for internationalization)
+
+Well, reST also has these. But you know, Kaj is simpler and still powerful.
+
+= Try it.
+
+.. image{png} https://avatars2.githubusercontent.com/u/1451509?v=2&s=512
+   :alt: The author, Jak Wings' Avatar
+   :link: https://github.com/jakwings/Kaj-Markup-Language
+   :caption: This is my GitHub avatar. :)
+</textarea>
+            <div>
+              <input id="convert" type="button" value="Convert (Ctrl+Enter)" class="btn btn-sm btn-primary">
+              <label><input id="auto" type="checkbox" checked="true">Auto Convert</label>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default col-md-6 hidden-xs">
+          <div class="panel-heading">HTML5 Source Code</div>
+          <div class="panel-body">
+            <textarea id="output" autofocus></textarea>
+            <div class="invisible">
+              <input type="button" value="Convert (Ctrl+Enter)" class="btn btn-sm btn-primary">
+              <label><input type="checkbox" checked="true">Auto Convert</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel panel-default col-xs-12">
+          <div class="panel-heading">Live Preview</div>
+          <div class="panel-body">
+            <iframe id="preview"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var doc = this.document;
+      var btn = doc.getElementById('convert');
+      var input = doc.getElementById('input');
+      var output = doc.getElementById('output');
+      var preview = doc.getElementById('preview');
+      var previewDoc = preview.contentWindow.document;
+      var auto = doc.getElementById('auto');
+      var clickEvent = document.createEvent('MouseEvents');
+      clickEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+      var updateView = function () {
+        preview.style.height = (previewDoc.documentElement.clientHeight + 30) + 'px';
+      };
+      btn.addEventListener('click', function () {
+        try {
+          var prefix = '<link rel="stylesheet" href="bootstrap.css">';
+          var result = kaj(input.value);
+          output.value = result;
+          previewDoc.open();
+          preview.contentWindow.onload = updateView;
+          previewDoc.write(prefix + result);
+          previewDoc.close();
+        } catch (err) {
+          output.value = err.message;
+          previewDoc.open();
+          preview.contentWindow.onload = updateView;
+          previewDoc.write(prefix + err.message);
+          previewDoc.close();
+        }
+      }, false);
+      window.addEventListener('resize', updateView, false);
+      window.addEventListener('keypress', function (evt) {
+        if ((evt.keyCode === 13) && evt.ctrlKey) {
+          evt.preventDefault();
+          btn.dispatchEvent(clickEvent);
+          input.focus && input.focus();
+        }
+      }, false);
+      input.addEventListener('input', function () {
+        if (auto.checked) {
+          btn.dispatchEvent(clickEvent);
+        }
+      }, false);
+      btn.dispatchEvent(clickEvent);
+    </script>
+  </body>
+</html>
