@@ -443,9 +443,9 @@ With an explicit directives (at most one body is allowed):
 
 All native explicit directives:
 
-    .. @merge{path/to/file}
+    .. @merge{} path/to/file
 
-    .. @embed{path/to/file}
+    .. @embed{} path/to/file
 
     .. @{metadata}
        :author: Jak Wings
