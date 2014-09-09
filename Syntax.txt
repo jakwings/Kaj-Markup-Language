@@ -443,7 +443,7 @@ With an explicit directives (at most one body is allowed):
 
 All native explicit directives:
 
-    .. @merge{} path/to/file
+    .. @include{} path/to/file
 
     .. @embed{} path/to/file
 
