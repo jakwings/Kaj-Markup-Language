@@ -452,6 +452,9 @@ All native explicit directives:
        :date: 2014-01-01
        :category: other
 
+    .. comment{true}
+       If "true", this comment will show up in the HTML code or it will be ignored.
+
     .. raw{html}
        <div>something</div>
 
@@ -488,6 +491,7 @@ All native explicit directives:
        :style: width: 50px; height: 50px;
        :class: shadow
        :lazyload: true
+       :simple: false
 
     .. pipe-image{logo} http://example.com/logo.png
        :alt: My logo.
