@@ -190,7 +190,7 @@ which gives:
 
 Others:
 
-    [[link to title | =1-2=]]
+    [[link to title | =1.2=]]
     [[link to defined uri | {homepage}]]
 
 {| |}
