@@ -18,7 +18,7 @@ Demo: http://jakwings.github.io/Kaj-Markup-Language/
 Implementations
 ===============
 
-* [kaj.js](https://github.com/jakwings/kaj.js) (JavaScript, Node.js)
+* **Official** [kaj.js](https://github.com/jakwings/kaj.js) (JavaScript, Node.js)
 
 License Information
 ===================
