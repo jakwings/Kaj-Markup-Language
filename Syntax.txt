@@ -141,8 +141,8 @@ Text inside "{# #}" is the id of an anchor. For example:
 
 which gives:
 
-    <span class="kaj-anchor-tag" id="kaj-anchor-def-first"></span>First, you need an apple.
-    <span class="kaj-anchor-tag" id="kaj-anchor-def-first"></span>首先，你需要一只苹果。
+    <span id="kaj-anchor-def-first" class="kaj-anchor-def"></span>First, you need an apple.
+    <span id="kaj-anchor-def-first" class="kaj-anchor-def"></span>首先，你需要一只苹果。
 
 {[ ]}
 -----
@@ -245,16 +245,18 @@ in a new section in the previous section. For example:
 
 which gives:
 
-    <h1 class="kaj-title" id="kaj-title-1"><span>Section 1</span></h1>
-
-      <section><h1 class="kaj-title" id="kaj-title-1-1"><span>Section 1-1</span></h1>
-        <section><h1 class="kaj-title" id="kaj-title-1-1-1"><span>Section 1-1-1</span></h1>
+    <div id="kaj-section-1" class="kaj-section">
+      <h1 class="kaj-title"><span>Section 1</span></h1>
+      <section id="kaj-section-1-1" class="kaj-section">
+        <h1 class="kaj-title"><span>Section 1-1</span></h1>
+        <section id="kaj-section-1-1-1" class="kaj-section">
+          <h1 class="kaj-title"><span>Section 1-1-1</span></h1>
         </section>
       </section>
-
-      <section><h1 class="kaj-title" id="kaj-title-1-2"><span>Section 1-2</span></h1>
+      <section id="kaj-section-1-2" class="kaj-section">
+        <h1 class="kaj-title"><span>Section 1-2</span></h1>
       </section>
-
+    </div>
     <p>Paragraph</p>
 
 Unordered Lists
