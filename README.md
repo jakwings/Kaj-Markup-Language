@@ -5,13 +5,14 @@ Kaj is a simple and extensible markup language for writing HTML5 documents.
 
 Kaj is similar to reStructuredText (reST).
 
-The Kaj to HTML5 converter (written in JavaScript) is almost ready now, but I won't put it here. Just wait.
+Powerful features
+=================
 
-    - [X] Basic markups (inline/block level)
-    - [X] Extensible "role"s
-    - [X] Extensible "directive"s
-    - [X] Customizable renderers
-    - [X] Aliases for "role"s and "directive"s are possible. (for internationalization)
+* Basic markups (inline/block level)
+* Extensible "role"s
+* Extensible "directive"s
+* Customizable renderers
+* Aliases for "role"s and "directive"s are possible. (for internationalization)
 
 Demo: http://jakwings.github.io/Kaj-Markup-Language/
 
