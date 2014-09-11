@@ -509,3 +509,6 @@ All native explicit directives:
     .. header{}
 
     .. footer{}
+
+    .. role{del}
+       :wrapper: del
