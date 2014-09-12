@@ -85,7 +85,8 @@ Well, reST also has these. But you know, Kaj is simpler and still powerful.
       };
       btn.addEventListener('click', function () {
         try {
-          var prefix = '<link rel="stylesheet" href="bootstrap.css">';
+          //var prefix = '<link rel="stylesheet" href="bootstrap.css">';
+          var prefix = '';
           var result = kaj(input.value);
           output.value = result;
           previewDoc.open();
