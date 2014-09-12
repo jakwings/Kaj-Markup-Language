@@ -256,8 +256,8 @@ which gives:
       <section id="kaj-section-1-2" class="kaj-section">
         <h1 class="kaj-title"><span>Section 1-2</span></h1>
       </section>
+      <p>Paragraph</p>
     </div>
-    <p>Paragraph</p>
 
 Unordered Lists
 ---------------
