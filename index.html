@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="style.css">
+    <script src="beautify.js"></script>
+    <script src="beautify-css.js"></script>
+    <script src="beautify-html.js"></script>
     <script src="kaj.js"></script>
   </head>
   <body>
@@ -88,7 +91,10 @@ Well, reST also has these. But you know, Kaj is simpler and still powerful.
           //var prefix = '<link rel="stylesheet" href="bootstrap.css">';
           var prefix = '';
           var result = kaj(input.value);
-          output.value = result;
+          output.value = html_beautify(result, {
+            indent_size: 2,
+            wrap_line_length: 0
+          });
           previewDoc.open();
           preview.contentWindow.onload = updateView;
           previewDoc.write(prefix + result);
