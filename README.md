@@ -1,4 +1,4 @@
-<div><img alt="logo" src="logo.png" style="width:240px;height:120px"></div>
+<div><img alt="logo" src="logo.png" width="240" height="120"></div>
 
 Kaj Markup Language
 ===================
