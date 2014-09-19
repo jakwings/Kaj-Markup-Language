@@ -1,3 +1,5 @@
+<div><img alt="logo" src="logo.png" style="width:240px;height:120px"></div>
+
 Kaj Markup Language
 ===================
 
