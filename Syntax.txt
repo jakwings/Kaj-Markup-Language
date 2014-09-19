@@ -248,13 +248,13 @@ which gives:
     <div id="kaj-section-1" class="kaj-section">
       <h1 class="kaj-title"><span>Section 1</span></h1>
       <section id="kaj-section-1-1" class="kaj-section">
-        <h1 class="kaj-title"><span>Section 1-1</span></h1>
+        <h2 class="kaj-title"><span>Section 1-1</span></h2>
         <section id="kaj-section-1-1-1" class="kaj-section">
-          <h1 class="kaj-title"><span>Section 1-1-1</span></h1>
+          <h3 class="kaj-title"><span>Section 1-1-1</span></31>
         </section>
       </section>
       <section id="kaj-section-1-2" class="kaj-section">
-        <h1 class="kaj-title"><span>Section 1-2</span></h1>
+        <h2 class="kaj-title"><span>Section 1-2</span></h1>
       </section>
       <p>Paragraph</p>
     </div>
