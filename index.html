@@ -84,7 +84,8 @@ Well, reST also has these. But you know, Kaj is simpler and still powerful.
       var clickEvent = document.createEvent('MouseEvents');
       clickEvent.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
       var updateView = function () {
-        preview.style.height = (previewDoc.documentElement.clientHeight + 30) + 'px';
+        preview.style.height = 'auto';
+        preview.style.height = previewDoc.documentElement.clientHeight + 'px';
       };
       btn.addEventListener('click', function () {
         try {
