@@ -11,8 +11,8 @@ Powerful features
 =================
 
 * Basic markups (inline/block level)
-* Extensible "role"s
-* Extensible "directive"s
+* Customizable "role"s
+* Customizable "directive"s
 * Customizable renderers
 * Aliases for "role"s and "directive"s are possible. (for internationalization)
 

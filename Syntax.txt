@@ -512,3 +512,9 @@ All native explicit directives:
 
     .. role{del}
        :wrapper: del
+
+    .. alias{role} latex
+       :to: general
+
+    .. alias{directive} link
+       :to: 連結
