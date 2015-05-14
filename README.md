@@ -18,8 +18,6 @@ Powerful features
 
 Demo: http://jakwings.github.io/Kaj-Markup-Language/
 
-Intro (Chinese): http://www.likelikeslike.com/memorandum/kaj-intro.html
-
 Implementations
 ===============
 
